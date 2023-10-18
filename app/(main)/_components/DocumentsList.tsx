@@ -1,7 +1,8 @@
 import React from "react";
-import { useQuery } from "convex/react";
+import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { File, MoreHorizontal, Trash } from "lucide-react";
+import { Id } from "@/convex/_generated/dataModel";
 
 import {
   DropdownMenu,
@@ -12,9 +13,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
 const DocumentsList = () => {
   const documents = useQuery(api.documents.getSidebar);
+  const archive = useMutation(api.documents.archive);
+
+  const onArchive = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    documentId: Id<"documents">
+  ) => {
+    e.stopPropagation();
+    const document = archive({ id: documentId });
+
+    toast.promise(document, {
+      loading: "Archiving Note",
+      success: "Note archived",
+      error: "Failed to archive the note",
+    });
+  };
 
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
@@ -28,7 +45,7 @@ const DocumentsList = () => {
           className="px-8 group/document py-2 flex justify-between items-center gap-2 hover:bg-gray-200 cursor-pointer"
           key={document._id}
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-sm">
             <File className="w-4 h-4 text-gray-600" />
             {document?.title}
           </div>
@@ -40,7 +57,10 @@ const DocumentsList = () => {
                 </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-60">
-                <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                <DropdownMenuItem
+                  className="flex items-center gap-2 cursor-pointer"
+                  onClick={(e) => onArchive(e, document._id)}
+                >
                   <Trash className="text-gray-600 w-4 h-4" />
                   Delete
                 </DropdownMenuItem>
