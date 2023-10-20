@@ -22,7 +22,7 @@ const Navigation = () => {
         isSidebarOpen ? `${isMobile ? "w-screen" : "w-[300px]"}` : "w-0"
       }  bg-secondary group relative overflow-x-hidden transition-all duration-300`}
     >
-      <div className="flex justify-between items-center hover:bg-gray-200 p-4">
+      <div className="flex justify-between items-center hover:bg-gray-200 dark:hover:bg-stone-700  p-4">
         <div className="flex gap-2 items-center">
           <UserButton afterSignOutUrl="/" />
           <span className="text-sm w-[150px] cursor-default">
@@ -37,7 +37,7 @@ const Navigation = () => {
         />
       </div>
       <Items />
-      <div className="absolute w-1 h-full right-0 top-0 bg-gray-200 opacity-0 group-hover:opacity-100 transition-all"></div>
+      <div className="absolute w-1 h-full right-0 top-0 bg-gray-200 dark:bg-stone-700 opacity-0 group-hover:opacity-100 transition-all"></div>
     </div>
   );
 };

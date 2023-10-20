@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import { useMediaQuery } from "usehooks-ts";
-import Navbar from "../../_components/Navbar";
 import { useSidebar } from "@/app/context/SidebarContext";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import MainNavbar from "../../_components/MainNavbar";
 
-const DocumentsPage = () => {
+const MainPage = () => {
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const create = useMutation(api.documents.create);
@@ -31,14 +31,20 @@ const DocumentsPage = () => {
       }
        transition-all duration-300 overflow-x-hidden flex flex-col items-center h-full`}
     >
-      <Navbar />
+      <MainNavbar />
       <div className="flex flex-col justify-center items-center w-full h-full">
-        <div className="relative w-[300px] h-[300px]">
+        <div className="relative w-[300px] h-[300px] md:w-[350px] md:h-[350px]">
           <Image
             src="/empty.png"
             fill
             alt="document-img"
-            className="object-contain"
+            className="object-contain dark:hidden"
+          />
+          <Image
+            src="/empty-dark.png"
+            fill
+            alt="document-img"
+            className="object-contain hidden dark:block"
           />
         </div>
 
@@ -48,4 +54,4 @@ const DocumentsPage = () => {
   );
 };
 
-export default DocumentsPage;
+export default MainPage;

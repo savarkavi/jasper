@@ -10,13 +10,16 @@ import {
   CommandShortcut,
 } from "@/components/ui/command";
 import { api } from "@/convex/_generated/api";
+import { useSearch } from "@/hooks/use-search";
 import { useQuery } from "convex/react";
 
 const SearchCommand = () => {
   const documents = useQuery(api.documents.getSidebar);
+  const isOpen = useSearch((store) => store.isOpen);
+  const onClose = useSearch((store) => store.onClose);
 
   return (
-    <Command>
+    <CommandDialog open={isOpen} onOpenChange={onClose}>
       <CommandInput placeholder="Search your Notes..." />
       <CommandList>
         <CommandEmpty>Sorry, no results found :(</CommandEmpty>
@@ -26,7 +29,7 @@ const SearchCommand = () => {
           ))}
         </CommandGroup>
       </CommandList>
-    </Command>
+    </CommandDialog>
   );
 };
 

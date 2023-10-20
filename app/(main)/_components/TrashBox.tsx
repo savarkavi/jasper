@@ -50,6 +50,14 @@ const TrashBox = () => {
     }
   };
 
+  const handleDocumentClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    documentId: Id<"documents">
+  ) => {
+    e.stopPropagation();
+    router.push(`/documents/${documentId}`);
+  };
+
   const filteredDocuments = archivedDocuments?.filter((document) => {
     return document.title.toLowerCase().includes(search.toLowerCase());
   });
@@ -57,21 +65,21 @@ const TrashBox = () => {
   console.log(filteredDocuments);
 
   return (
-    <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer mt-4 w-full">
+    <div className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-stone-700  cursor-pointer mt-4 w-full">
       <Popover>
         <PopoverTrigger>
-          <div className="flex items-center gap-2 text-gray-600 min-w-[800px] w-full">
+          <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300  min-w-[800px] w-full">
             <Trash className="w-4 h-4" />
             <span>Trash</span>
           </div>
         </PopoverTrigger>
-        <PopoverContent className="flex flex-col justify-center items-center gap-4">
+        <PopoverContent className="p-2 flex flex-col justify-center items-center gap-4">
           <div className="flex items-center gap-2">
             <Search />
             <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="h-6 outline-none bg-secondary"
+              className="h-6 outline-none bg-secondary mt-1"
               placeholder="search archived notes"
             />
           </div>
@@ -82,7 +90,8 @@ const TrashBox = () => {
             return (
               <div
                 key={document._id}
-                className="flex justify-between items-center w-full text-sm cursor-default"
+                className="flex justify-between items-center w-full text-sm cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
+                onClick={(e) => handleDocumentClick(e, document._id)}
               >
                 {document.title}
                 <div className="flex items-center gap-2">
