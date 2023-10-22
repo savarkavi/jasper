@@ -10,18 +10,22 @@ import {
 } from "@/components/ui/popover";
 
 type IconPicker = {
-  onChange: () => void;
+  onChange: (icon: string) => void;
   children: React.ReactNode;
   asChild?: boolean;
 };
 
 const IconPicker = ({ children, onChange, asChild }: IconPicker) => {
   return (
-    <div>
+    <div className="">
       <Popover>
         <PopoverTrigger>{children}</PopoverTrigger>
         <PopoverContent className="w-full p-0">
-          <EmojiPicker />
+          <EmojiPicker
+            width={350}
+            height={350}
+            onEmojiClick={(data) => onChange(data.emoji)}
+          />
         </PopoverContent>
       </Popover>
     </div>
