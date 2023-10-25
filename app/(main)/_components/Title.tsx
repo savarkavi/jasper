@@ -24,7 +24,7 @@ const Title = ({
         <input
           value={value}
           onChange={(e) => onInputChange(e.target.value)}
-          className="outline-none"
+          className="outline-none bg-transparent"
         />
       </div>
     </div>

@@ -8,6 +8,7 @@ import Title from "./Title";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import CoverImageModal from "./CoverImageModal";
+import Editor from "./Editor";
 
 const Toolbar = ({
   document,
@@ -25,6 +26,10 @@ const Toolbar = ({
 
   const onEmojiRemove = () => {
     removeIcon({ documentId: document._id });
+  };
+
+  const onChange = (content: string) => {
+    update({ documentId: document._id, content: content });
   };
 
   return (
@@ -80,10 +85,7 @@ const Toolbar = ({
         </div>
         <Title document={document} />
       </div>
-      <TextareaAutosize
-        placeholder="Enter your text here"
-        className="outline-none w-full"
-      />
+      <Editor onChange={onChange} initialContent={document.content} />
     </div>
   );
 };

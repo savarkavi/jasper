@@ -14,12 +14,10 @@ const Navigation = () => {
     setIsSidebarOpen(false);
   };
 
-  console.log(isSidebarOpen, isMobile);
-
   return (
     <div
       className={`${
-        isSidebarOpen ? `${isMobile ? "w-screen" : "w-[300px]"}` : "w-0"
+        isSidebarOpen ? "w-[300px]" : `w-0`
       }  bg-secondary group relative overflow-x-hidden transition-all duration-300`}
     >
       <div className="flex justify-between items-center hover:bg-gray-200 dark:hover:bg-stone-700  p-4">

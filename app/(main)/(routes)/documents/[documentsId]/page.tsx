@@ -20,10 +20,13 @@ const DocumentPage = () => {
   }
 
   return (
-    <div className="h-full">
+    <div
+      className={`
+    transition-all duration-300 overflow-x-hidden flex flex-col items-center h-full`}
+    >
       <DocNavbar />
       <CoverImage url={document.coverImage} />
-      <div className="mt-8">
+      <div className={`mt-8`}>
         <Toolbar document={document} />
       </div>
     </div>

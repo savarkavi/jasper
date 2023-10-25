@@ -41,9 +41,6 @@ const MainNavbar = () => {
             {!!document?.icon && document.icon}
             {document?.title}
           </div>
-          <div className="flex items-center gap-4">
-            <Button>Publish</Button>
-          </div>
         </div>
       </div>
       {document?.isArchived && <Banner documentId={document._id} />}

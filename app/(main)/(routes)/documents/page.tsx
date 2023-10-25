@@ -26,9 +26,7 @@ const MainPage = () => {
 
   return (
     <div
-      className={`${
-        isSidebarOpen ? `${isMobile ? "w-0" : "w-full"}` : "w-screen"
-      }
+      className={`
        transition-all duration-300 overflow-x-hidden flex flex-col items-center h-full`}
     >
       <MainNavbar />
